@@ -11,7 +11,7 @@ CREATE TABLE posts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     userId INTEGER NOT NULL,
     cuisineType TEXT NOT NULL,
-    cuisineLevel TEXT NOT NULL,
+    cuisineLevel INTEGER NOT NULL,
     timeCreated TEXT NOT NULL,
     title TEXT NOT NULL,
     likeCount INTEGER NOT NULL,
