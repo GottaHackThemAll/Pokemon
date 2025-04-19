@@ -15,10 +15,32 @@ const Login = () => {
         setPassword(event.target.value);
     }
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-
-
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        const uri = "http://localhost:5000/auth/login";
+        try {
+            const reqJSON = {"username": username, "password": password};
+            fetch(uri, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(reqJSON)
+            }).then((res) => {
+                return res.json();
+            }).then((res) => {
+                if (res.status != 200) {
+                    const err = document.querySelector('#err-msg');
+                    err.innerHTML = "Incorrect Username or Password";
+                } else {
+                    localStorage.setItem('token', res.token);
+                    localStorage.setItem('username', res.username);
+                    navigate("/CountrySelect");
+                }
+            })
+        } catch (e) {
+            console.log(e);
+        }
     }
 
 
@@ -52,8 +74,9 @@ const Login = () => {
                     </InputGroup>
                     <Button variant="link" style={{ color:"#E7FFD3"}} onClick={() => navigate("/Signup")}> Don't have an account? </Button>        
                 </div>
-                <div className='d-flex flex-column align-items-center'>
-                    <button class="login-submit-btn mt-5" onClick={() => navigate("/CountrySelect")} type="submit">Submit</button>
+                <div className='d-flex flex-column align-items-center relative'>
+                    <p id='err-msg' className='absolute text-red-500 text-xs left-[50%] -translate-x-1/2'></p>
+                    <button class="login-submit-btn mt-5" onClick={handleSubmit} type="submit">Submit</button>
                     <Button variant="link" style={{ color:"#E7FFD3"}} onClick={() => navigate("/")}>Back to Home </Button>    
                 </div>
             </div>
