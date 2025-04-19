@@ -273,3 +273,7 @@
   max-width: none !important;
   width: 40%  !important;
 }
+
+.ingredientList:has(.results:empty) {
+  display: none;
+}
