@@ -1,16 +1,18 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import food from '../assets/food.jpg';
 import { Button } from 'react-bootstrap';
 import { ArrowLeft } from 'react-bootstrap-icons';
 
 const Level = () => {
     const navigate = useNavigate();
+
+
     return (
         <div className="bg-[#7EBB5F] w-[50vw] rounded-3xl flex flex-column justify-center items-center my-4 p-5">
             <Button variant="link" className='d-flex align-self-start items-center' style={{ color:"#E7FFD3", gap:"5px"}} onClick={() => navigate("/CountrySelect")}> <ArrowLeft/> Country Select </Button>   
             <div className="w-[90%]">
                 <div className="flex justify-between text-3xl text-[#F8FFF1] font-semibold">
-                    <p>Country</p>
+                    <p>{selectedCountry}</p>
                     <p>Level 1</p>
                 </div>
                 <div className="text-left text-[#F8FFF1] text-5xl font-bold">
