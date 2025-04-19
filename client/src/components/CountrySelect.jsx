@@ -1,10 +1,12 @@
-import { Navigate, useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import america from '../assets/america.png';
 
 
 const CountrySelect = () => {
+    const navigate = useNavigate(); 
     const goToLevel = () => {
+        navigate("/LevelSelect");
         console.log("hi")
     }
     
@@ -32,7 +34,9 @@ const CountrySelect = () => {
                     <img className="h-10 mr-2" src={america}></img>
                     Italy            
                 </div>
-            </div>  
+            </div> 
+
+            <Button variant="link" style={{ color:"#E7FFD3"}} onClick={() => navigate("/")}>Back to Home </Button> 
         </div>
     );
 };

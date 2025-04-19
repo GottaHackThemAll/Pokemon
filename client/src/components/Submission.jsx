@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import '../index.css';
 import { useNavigate } from 'react-router-dom';
+import { PlusCircle } from 'react-bootstrap-icons';
+import { Button } from 'react-bootstrap';
 
 const Submission = () => {
   const [photo, setPhoto] = useState(null);
@@ -23,7 +24,7 @@ const Submission = () => {
         {photo ? (
           <img src={photo} alt="Preview" className="photo-preview" />
         ) : (
-          '+'
+          <PlusCircle width="40" height="40" />
         )}
         <input
           id="upload-photo"
@@ -41,9 +42,13 @@ const Submission = () => {
         onChange={(e) => setComment(e.target.value)}
       />
 
-      <button className="green-btn" onClick={handleSubmit}>
-        Submit Photo
-      </button>
+      <div className='d-flex flex-column'>
+        <button className="submission-btn" onClick={handleSubmit}>
+          Submit Photo
+        </button>
+        <Button variant="link" style={{ color:"#E7FFD3"}} onClick={() => navigate("/")}>Back to Home </Button>
+      </div>
+
     </div>
   );
 };

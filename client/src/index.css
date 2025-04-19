@@ -48,21 +48,21 @@
 .login-input-box {
   color: #E7FFD3;
 }
+
 .submission-container {
-  background-color: #8FBC8F;
-  padding: 30px;
+  background-color: #7EBB5F;
+  width: 40%;
+  padding: 50px;
   border-radius: 10px;
-  max-width: 500px;
-  margin: 50px auto;
-  text-align: center;
 }
 
 .photo-label {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #d3d3d3;
-  height: 200px;
+  background-color: #D9D9D9;
+  height: 300px;
+  width: 100%;
   border-radius: 10px;
   margin-bottom: 15px;
   cursor: pointer;
@@ -81,20 +81,49 @@
   border: none;
   padding: 10px;
   margin-bottom: 15px;
+  background-color: #F8FFF1;
+}
+
+.submission-btn {
+  background-color: #F8FFF1;
+  color: #3A3A3A;
+  padding-inline: 80px;
+  padding-block: 10px;
+  border-radius: 10px;
+  max-width: 300px;
+  align-self: center;
 }
 
 .forum-container {
   padding: 30px;
-  max-width: 800px;
   margin: 0 auto;
+  padding-inline: 100px;
+  border-left: 1px solid #3A3A3A;
+  border-right: 1px solid #3A3A3A;
 }
 
 .your-post {
   background-color: #7EBB5F;
   color: #E7FFD3;
-  padding: 20px;
+  padding: 30px;
   border-radius: 10px;
   margin-bottom: 40px;
+}
+
+.your-post-header {
+  font-size: 1.75rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.your-post img {
+  border-radius: 10px;
+  max-width: 500px;
+}
+
+.post-img {
+  border-radius: 10px;
+  max-width: 500px;
 }
 
 .others-header {
@@ -107,22 +136,138 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-height: 400px;
-  overflow-y: auto;
+
 }
 
 .post-card {
-  background-color: #f5fbef;
   border-radius: 10px;
-  padding: 15px;
+  padding-inline: 50px;
+  padding-block: 30px;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 5px;
 }
 
 .post-card img {
-  height: 100px;
-  width: 100px;
+  max-width: 500px;
   object-fit: cover;
   border-radius: 10px;
+}
+
+.hr {
+  border-top: 1px solid #3A3A3A;
+  margin: 1em 0;
+  width: 100%;
+}
+
+.level-select-header {
+  font-weight: bold;
+  align-items: start;
+}
+
+.level-select-header.title {
+  font-size: 3rem;
+}
+
+.level-select-header.level {
+  font-size: 2rem;
+  color: #7EBB5F;
+  margin-left: 25px;
+}
+
+.level-select-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.level-bubbles-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.level-row {
+  display: flex;
+  margin: 0;
+}
+
+.level-select-bubble {
+  width: 80px;
+  height: 80px;
+  padding: 50px;
+  background: #7EBB5F;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+  
+}
+
+.level-select-bubble:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.level-number {
+  color:#E7FFD3;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.difficulty-label {
+  font-size: 12px;
+  margin-top: 5px;
+  text-transform: capitalize;
+}
+
+/* Difficulty colors */
+.level-select-bubble.easy {
+  background-color: #7EBB5F; 
+}
+
+.level-select-bubble.intermediate {
+  background-color: #7EBB5F; 
+}
+
+.level-select-bubble.hard {
+  background-color: #7EBB5F; 
+}
+
+.choose-level-modal-title {
+  font-size: 2.5rem !important;
+  color: #E7FFD3 !important;
+}
+
+.choose-level-modal .modal-content {
+  background-color: #7EBB5F;
+}
+
+.choose-level-recipes {
+  background-color: #E7FFD3;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.choose-level-recipes:hover {
+  background-color: #c6ecb3;
+}
+
+.choose-level-recipes img {
+  max-width: 125px;
+  border-radius: 5px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.choose-level-recipes-text {
+  font-size: 1.75rem;
+}
+
+.modal-50w {
+  max-width: none !important;
+  width: 40%  !important;
 }

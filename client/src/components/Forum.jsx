@@ -1,7 +1,12 @@
 import React from 'react';
-import '../index.css';
+import food from '../assets/food.jpg';
+import { HandThumbsUp } from 'react-bootstrap-icons';
+import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { ArrowLeft } from 'react-bootstrap-icons';
 
 const Forum = () => {
+  const navigate = useNavigate();
   // Dummy data for others' posts
   const otherPosts = [
     {
@@ -21,27 +26,41 @@ const Forum = () => {
     },
   ];
 
-  return (
-    <div className="forum-container">
+return (
+  <div className="d-flex justify-content-center w-50">
+
+    <div className="forum-container d-flex flex-column text-left">
+    <Button variant="link" className='d-flex align-self-start align-items-center' style={{ color:"#7EBB5F", gap:"5px"}} onClick={() => navigate("/LevelSelect")}> <ArrowLeft/> Level Select </Button> 
       {/* Your post section */}
-      <div className="your-post">
-        <h2>Your Submission</h2>
-        <img src="https://via.placeholder.com/200" alt="Your Dish" style={{ borderRadius: '10px', width: '100%', marginTop: '10px' }} />
-        <p style={{ marginTop: '10px' }}>This was my take on the Moroccan Tagine recipe 🌿</p>
+      <div className="your-post px-5">
+        <h2 className="your-post-header">Your Post</h2>
+        <img src={food} className="img-fluid" />
+        <div className="d-flex p-3 align-items-end justify-content-between">
+          <p style={{ marginTop: '10px' }}> This was my take on the Moroccan Tagine recipe 🌿</p>
+          <HandThumbsUp  width="40" height="40" />
+        </div>
       </div>
 
       {/* Others' posts section */}
       <div className="others-header">See what others made</div>
+      <div className='hr'/>
       <div className="posts-container">
         {otherPosts.map((post) => (
-          <div key={post.id} className="post-card">
-            <img src={post.photo} alt="User Post" />
-            <p>{post.description}</p>
+          <div>
+            <div key={post.id} className="post-card d-flex flex-column text-left">
+              <img src={food} className="post-img img-fluid" />
+              <div className="d-flex p-3 align-items-end justify-content-between w-100">
+                <p style={{ marginTop: '10px' }}> {post.description} </p>
+                <HandThumbsUp  width="40" height="40" />
+              </div>
+            </div>
+            <div className='hr'/>
           </div>
         ))}
       </div>
     </div>
-  );
+  </div>
+);
 };
 
 export default Forum;
