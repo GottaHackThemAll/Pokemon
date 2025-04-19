@@ -6,6 +6,8 @@ import './App.css';
 const Home = lazy(() => import('./components/Home'));
 const CountrySelect = lazy(() => import('./components/CountrySelect'));
 const Level = lazy(() => import('./components/Level'));
+const Submission = lazy(() => import('./components/Submission'));
+const Forum = lazy(() => import('./components/Forum'));
 
 const App = () => {
   return (
@@ -23,6 +25,13 @@ const App = () => {
             <Route path="/Level" element={
               <Level />
             }/>
+
+            <Route path="/CountrySelect" element={
+              <CountrySelect />
+             }/>
+              {/* test */}
+             <Route path="/Submission" element={<Submission />} />
+             <Route path="/Forum" element={<Forum />} />
           </Routes>
         </div>
       </div>

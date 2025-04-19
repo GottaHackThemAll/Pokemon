@@ -4,3 +4,107 @@
     border-radius: 15px !important;
     font-size: 1rem !important;
 }
+
+.green-btn {
+  color: #E7FFD3;
+  background: #7EBB5F ;
+  border-radius: 10px;
+  border: transparent 2px solid;
+  padding: none;
+}
+
+.green-btn:hover {
+  color: #7EBB5F;
+  background: #E7FFD3;
+}
+
+.home {
+  margin-left: 200px;
+}
+
+.home-header {
+  font-size: 4.5rem;
+}
+
+.home-header-btn {
+  font-size: 2rem;
+}
+
+.submission-container {
+  background-color: #8FBC8F;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.photo-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #d3d3d3;
+  height: 200px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.photo-preview {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.comment-box {
+  width: 100%;
+  height: 80px;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.forum-container {
+  padding: 30px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.your-post {
+  background-color: #7EBB5F;
+  color: #E7FFD3;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 40px;
+}
+
+.others-header {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #7EBB5F;
+}
+
+.posts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.post-card {
+  background-color: #f5fbef;
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.post-card img {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+}
