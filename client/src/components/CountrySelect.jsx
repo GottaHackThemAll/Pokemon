@@ -33,7 +33,8 @@ const CountrySelect = () => {
                     Italy            
                 </div>
             </div>  
-        <div>
+        </div>
     );
 };
+
 export default CountrySelect;
