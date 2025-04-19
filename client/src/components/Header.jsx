@@ -5,6 +5,10 @@ import duocook from '../assets/duocook.png';
 import { EmojiSunglasses } from 'react-bootstrap-icons';
 
 const Header = () => {
+
+    const [username, setUsername] = useState(localStorage.getItem('username'));
+    const [token, setToken] = useState(localStorage.getItem('token'));
+
     return (
         <Navbar className='d-flex w-100 px-5 justify-content-between' style={{zIndex:2}}>
             {/* Logo */}
