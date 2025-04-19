@@ -19,9 +19,6 @@ const App = () => {
             <Route path="/CountrySelect" element={
               <CountrySelect />
               }/>
-                          <Route path="/CountrySelect" element={
-              <CountrySelect />
-              }/>
           </Routes>
         </div>
       </div>

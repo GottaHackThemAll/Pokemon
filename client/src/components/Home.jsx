@@ -1,16 +1,3 @@
-<<<<<<< Updated upstream
-import { Navigate, useNavigate } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
-import duocook from '../assets/duocook.png';
-const Home = () => {
-    const navigate = useNavigate(); 
-    return (
-        <div>
-            Home page
-            <button onClick={() => navigate('/CountrySelect')}>
-                Go to country select
-            </button>
-=======
 import { useNavigate } from 'react-router-dom';
 import duocook from '../assets/duocook.png';
 const Home = () => {
@@ -24,7 +11,6 @@ const Home = () => {
                 </button>
             </div>
             <img src={duocook}/>  
->>>>>>> Stashed changes
         </div>
         
     );
