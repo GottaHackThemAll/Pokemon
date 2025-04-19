@@ -10,6 +10,11 @@ const Home = () => {
                 <button className='green-btn home-header-btn' onClick={() => navigate('/CountrySelect')}>
                     Start your cooking Journey
                 </button>
+
+                <button className='green-btn' onClick={() => navigate('/Submission')}>
+                    Go to Submission Page
+                </button>
+                
             </div>
             <img src={duocook}/>  
         </div>
