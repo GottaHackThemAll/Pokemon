@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app import jwt, bcrypt
+from app import jwt, bcrypt, create_access_token
 from db_util import get_db_connection
 
 auth_bp = Blueprint('auth', __name__)
@@ -18,7 +18,7 @@ def login():
             
         # login logic
         conn = get_db_connection()
-        user = conn.execute('SELECT * FROM users WHERE username=?', (username,)).fetchone()
+        user = conn.execute('SELECT * FROM users WHERE username=?', (username,)).fetchall()
         user_list = [dict(row) for row in user]
         conn.close()
         if len(user_list) == 0:

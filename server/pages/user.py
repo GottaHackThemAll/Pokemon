@@ -1,11 +1,13 @@
 from flask import Blueprint, jsonify, request
 from app import bcrypt
+from app import jwt_required
 from db_util import get_db_connection
 
 user_blueprint = Blueprint('user', __name__)
 
 # GET ALL USERS
 @user_blueprint.route('/getAllUsers', methods=['GET'])
+@jwt_required()
 def get_user():
     try:
         conn = get_db_connection()
@@ -19,6 +21,7 @@ def get_user():
 
 # ADD A USER
 @user_blueprint.route('/addUser', methods=['POST'])
+@jwt_required()
 def add_user():
     try:
         # check json req body

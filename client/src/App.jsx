@@ -10,13 +10,16 @@ const App = () => {
   return (
     <Router basename='/'>
       <Suspense fallback={<div>Loading...</div>}>
-      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '90vh'}}>
-        <div style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh'}}>
+        <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
           <Routes>
             <Route path="/" element={
               <Home />
               }/>
             <Route path="/CountrySelect" element={
+              <CountrySelect />
+              }/>
+                          <Route path="/CountrySelect" element={
               <CountrySelect />
               }/>
           </Routes>

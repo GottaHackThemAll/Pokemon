@@ -1,5 +1,7 @@
 <<<<<<< Updated upstream
 import { Navigate, useNavigate } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import duocook from '../assets/duocook.png';
 const Home = () => {
     const navigate = useNavigate(); 
     return (
