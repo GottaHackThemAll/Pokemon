@@ -7,8 +7,8 @@ const Level = () => {
 
     
     return (
-        <div className="bg-[#7EBB5F] w-[60vw] rounded-3xl flex justify-center items-center my-4">
-            <div className="my-5">
+        <div className="bg-[#7EBB5F] w-[60vw] rounded-3xl flex justify-center items-center my-4 p-5">
+            <div className="">
                 <div className="flex justify-between text-3xl text-[#F8FFF1] font-semibold">
                     <p>Country</p>
                     <p>Level 1</p>
@@ -38,6 +38,9 @@ const Level = () => {
                         <li>hi</li>
                     </ul>
                 </div>
+                <button className="submitRecipeButton bg-[#F8FFF1] mt-4 px-5 py-2 hover:bg-[#e1facb]" onClick={console.log("hi")}>
+                    Submit Photo
+                </button>
             </div>
             
         </div>
