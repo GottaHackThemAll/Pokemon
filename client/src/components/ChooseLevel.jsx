@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 
-const ChooseLevel = ({show, onHide, meals, country, level}) => {
+const ChooseLevel = ({show, onHide, mealId ,}) => {
     const navigate = useNavigate();
     
     const handleMealClick = (mealId) => {
