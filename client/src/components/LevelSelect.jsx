@@ -26,30 +26,11 @@ const LevelSelect = () => {
     const location = useLocation();
     const selectedCountry = location.state?.country;
 
-    useEffect (() => {
-        Axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`).then((res) => {
-        setMealID(res.data.meals[0].strMeal);
-        })
-
-        console.log(selectedCountry)
-    })
-
     useEffect(() => {
         const fetchMeals = async () => {
             try {
                 // Get meal IDs for the selected country
                 const mealIds = Meals_by_Country[selectedCountry] || [];
-                constol
-                // Fetch all meals
-                mealIds.map(async (id) => {
-                    // const response = await Axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
-                    // setMealID(response)
-                    // console.log(mealID)
-                    // return response.data.meals[0];
-                    Axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`).then((res) => {
-                        setMealID(res.data.meals[0].strMeal);
-                    })
-                })
 
                 // Split meals into difficulty groups
                 const totalMeals = meals.length;
@@ -70,6 +51,8 @@ const LevelSelect = () => {
         }
     }, [selectedCountry]);
     
+    
+
     // Determine difficulty for each level
     const getDifficulty = (level) => {
         const totalLevels = levels.length;
@@ -104,10 +87,12 @@ const LevelSelect = () => {
                         >
                             <Col xs='auto'>
                                 <div 
-                                    className={`level-select-bubble rounded-circle ${difficulty}`}
+                                    className={`level-select-bubble rounded-circle`}
                                     onClick={handleLevelClick}
                                 >
                                     <span className='level-number'>{level}</span>
+                                    {difficulty}
+
                                 </div>
                             </Col>
                         </Row>
@@ -122,7 +107,7 @@ const LevelSelect = () => {
                 }} 
                 country={selectedCountry}
                 meals={mealsByDifficulty[getDifficulty(selectedLevel)] || []}
-                level={selectedLevel}
+                // level={selectedLevel}
             />
         </Container>
     );

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 
-const ChooseLevel = ({show, onHide, meals}) => {
+const ChooseLevel = ({show, onHide, meals, country, level}) => {
     const navigate = useNavigate();
     
     const handleMealClick = (mealId) => {
@@ -28,7 +28,9 @@ const ChooseLevel = ({show, onHide, meals}) => {
                 <Modal.Header closeButton>
                     {/* Title */}
                     <div className='d-flex'>           
-                        <Modal.Title className='choose-level-modal-title' > Choose your recipe! </Modal.Title>
+                        <Modal.Title className='choose-level-modal-title' > Choose your recipe!  </Modal.Title>
+                        {country}
+                        {/* {level} */}
                     </div>
                 </Modal.Header>
                 <Modal.Body className='d-flex flex-column p-3' style={{ gap: "15px" }}>
