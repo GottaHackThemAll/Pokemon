@@ -5,6 +5,7 @@ import './App.css';
 
 const Home = lazy(() => import('./components/Home'));
 const CountrySelect = lazy(() => import('./components/CountrySelect'));
+const Level = lazy(() => import('./components/Level'));
 
 const App = () => {
   return (
@@ -19,6 +20,9 @@ const App = () => {
             <Route path="/CountrySelect" element={
               <CountrySelect />
               }/>
+            <Route path="/Level" element={
+              <Level />
+            }/>
           </Routes>
         </div>
       </div>
