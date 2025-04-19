@@ -10,6 +10,7 @@
   background: #7EBB5F ;
   border-radius: 10px;
   border: transparent 2px solid;
+  text-decoration: none !important;
 }
 
 .green-btn:hover {
