@@ -4,6 +4,7 @@ import { lazy } from 'react';
 import './App.css';
 
 const Home = lazy(() => import('./components/Home'));
+const CountrySelect = lazy(() => import('./components/CountrySelect'));
 
 const App = () => {
   return (
@@ -14,6 +15,9 @@ const App = () => {
           <Routes>
             <Route path="/" element={
               <Home />
+              }/>
+            <Route path="/CountrySelect" element={
+              <CountrySelect />
               }/>
           </Routes>
         </div>
