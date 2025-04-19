@@ -85,7 +85,7 @@ def lvltype():
         cuisineType = request.args.get('cuisineType')
         
         conn = get_db_connection()
-        posts = conn.execute('SELECT * FROM posts WHERE cuisineLevel=? AND cuisineType=?', (cuisineLevel, cuisineType,)).fetchall()
+        posts = conn.execute('SELECT * FROM posts WHERE cuisineLevel=? AND cuisineType=? AND id != (SELECT MAX(id) FROM posts)', (cuisineLevel, cuisineType,)).fetchall()
         conn.close()
         
         list_of_dicts = [dict(row) for row in posts]
