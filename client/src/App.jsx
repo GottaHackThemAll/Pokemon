@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { lazy } from 'react';
 import './App.css';
 
+const Header = lazy(() => import('./components/header'));
 const Home = lazy(() => import('./components/Home'));
 const Login = lazy(() => import('./components/Login'));
 const Signup = lazy(() => import('./components/Signup'));
@@ -16,7 +17,8 @@ const App = () => {
   return (
     <Router basename='/'>
       <Suspense fallback={<div>Loading...</div>}>
-      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh'}}>
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '90vh'}}>
+        <Header/>
         <div style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
           <Routes>
             <Route path="/" element={ <Home /> }/>
