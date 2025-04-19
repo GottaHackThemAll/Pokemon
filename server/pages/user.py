@@ -61,3 +61,21 @@ def add_user():
         return jsonify(status=200, message="Successfully added user!")
     except Exception as e:
         return jsonify(status=400, message=str(e))
+    
+@user_blueprint.route('/byUsername', methods=['GET'])
+@jwt_required()
+@cross_origin()
+def getbyusername():
+    try:
+        username = request.args.get('username')
+        
+        conn = get_db_connection()
+        user = conn.execute('SELECT * FROM users WHERE username=?', (username,)).fetchone()
+        conn.close()
+        
+        if len(dict(user)) != 0:
+            return jsonify(status=200, message="success", user=dict(user)), 200
+        else:
+            return jsonify(status=403, message="user not found"), 400
+    except Exception as e:
+        return jsonify(status=400, message=str(e)), 400
