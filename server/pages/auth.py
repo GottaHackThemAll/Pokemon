@@ -29,7 +29,7 @@ def login():
             stored_hash = daUser['password']
             if bcrypt.check_password_hash(stored_hash, password):
                 access_token = create_access_token(identity=str(username))
-                return jsonify(status=200, message="Login Successful pog", token=access_token)
+                return jsonify(status=200, message="Login Successful pog", token=access_token, username=username)
             else:
                 return jsonify(status=403, message="Incorrect Password")
     except Exception as e:
