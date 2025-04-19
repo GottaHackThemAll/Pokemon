@@ -21,6 +21,7 @@ const App = () => {
             <Route path="/CountrySelect" element={
               <CountrySelect />
               }/>
+
                           <Route path="/CountrySelect" element={
               <CountrySelect />
               }/>
@@ -29,7 +30,6 @@ const App = () => {
               <Route path="/Submission" element={<Submission />} />
 
               <Route path="/Forum" element={<Forum />} />
-
           </Routes>
         </div>
       </div>

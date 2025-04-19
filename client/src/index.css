@@ -8,11 +8,15 @@
 
 .green-btn:hover {
   color: #7EBB5F;
-  background: #E7FFD3 ;
+  background: #E7FFD3;
+}
+
+.home {
+  margin-left: 200px;
 }
 
 .home-header {
-  font-size: 4rem;
+  font-size: 4.5rem;
 }
 
 .home-header-btn {
