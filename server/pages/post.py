@@ -73,3 +73,29 @@ def letsgetalltheseskibidiposts():
         return jsonify(status=200, message="Success", posts=post_info, pictures=pictures)
     except Exception as e:
         return jsonify(status=400, message=str(e))
+    
+@post_bp.route("/getByLevelAndType", methods=['GET'])
+@jwt_required()
+def lvltype():
+    try:
+        cuisineLevel = int(request.args.get('cuisineLevel'))
+        cuisineType = request.args.get('cuisineType')
+        
+        conn = get_db_connection()
+        posts = conn.execute('SELECT * FROM posts WHERE cuisineLevel=? AND cuisineType=?', (cuisineLevel, cuisineType,)).fetchall()
+        conn.close()
+        
+        list_of_dicts = [dict(row) for row in posts]
+        post_dict = {}
+        pics = []
+        
+        for index, original_dict in enumerate(list_of_dicts):
+            new_post_entry = {
+                k: (v if k != 'foodImage' else pics.append(base64.b64encode(original_dict['foodImage']).decode('utf-8'))) 
+                for k, v in original_dict.items()
+            }
+            post_dict[index] = new_post_entry
+        
+        return jsonify(status=200, message="Success", posts=post_dict, pictures=pics)
+    except Exception as e:
+        return jsonify(status=400, message=str(e)), 400
