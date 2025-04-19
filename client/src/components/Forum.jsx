@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import food from '../assets/food.jpg';
 import { HandThumbsUp } from 'react-bootstrap-icons';
 import { Button } from 'react-bootstrap';
@@ -7,24 +7,60 @@ import { ArrowLeft } from 'react-bootstrap-icons';
 
 const Forum = () => {
   const navigate = useNavigate();
-  // Dummy data for others' posts
-  const otherPosts = [
-    {
-      id: 1,
-      photo: 'https://via.placeholder.com/100',
-      description: 'Tried the Thai curry recipe—so good!',
-    },
-    {
-      id: 2,
-      photo: 'https://via.placeholder.com/100',
-      description: 'Here’s my Italian pasta with homemade sauce!',
-    },
-    {
-      id: 3,
-      photo: 'https://via.placeholder.com/100',
-      description: 'Made dumplings for the first time 👩‍🍳',
-    },
-  ];
+
+  const [title, setTitle] = useState("");
+  const [imgbinary, setImgbinary] = useState("");
+  const [postBody, setPostBody] = useState("");
+  const [likes, setLikes] = useState(0);
+
+  const [cuisineType, setCuisineType] = useState("");
+  const [cuisineLevel, setCuisineLevel] = useState(0);
+
+  const [otherPosts, setOtherPosts] = useState([]);
+  const [otherPics, setOtherPics] = useState([]);
+
+  const [token, setToken] = useState(localStorage.getItem('token'));
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // First fetch for the latest post
+        const uri = "http://localhost:5000/posts/getUserLatest";
+        const res1 = await fetch(uri, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const data1 = await res1.json();
+  
+        // Update state with the first fetch result
+        setTitle(data1.post.title);
+        setImgbinary(data1.post.foodImage);
+        setPostBody(data1.post.body);
+        setLikes(data1.post.likeCount);
+        setCuisineLevel(data1.post.cuisineLevel);
+        setCuisineType(data1.post.cuisineType);
+        const uri2 = `http://localhost:5000/posts/getByLevelAndType?cuisineLevel=${data1.post.cuisineLevel}&cuisineType=${data1.post.cuisineType}`;
+        const res2 = await fetch(uri2, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const data2 = await res2.json();
+        setOtherPosts(Object.values(data2.posts));
+        setOtherPics(data2.pictures);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
 return (
   <div className="d-flex justify-content-center w-50">
@@ -33,10 +69,10 @@ return (
     <Button variant="link" className='d-flex align-self-start align-items-center' style={{ color:"#7EBB5F", gap:"5px"}} onClick={() => navigate("/LevelSelect")}> <ArrowLeft/> Level Select </Button> 
       {/* Your post section */}
       <div className="your-post px-5">
-        <h2 className="your-post-header">Your Post</h2>
-        <img src={food} className="img-fluid" />
+        <h2 className="your-post-header">{title}</h2>
+        <img src={`data:image/png;base64,${imgbinary}`} className="img-fluid" />
         <div className="d-flex p-3 align-items-end justify-content-between">
-          <p style={{ marginTop: '10px' }}> This was my take on the Moroccan Tagine recipe 🌿</p>
+          <p style={{ marginTop: '10px' }}>{postBody}</p>
           <HandThumbsUp  width="40" height="40" />
         </div>
       </div>
@@ -45,12 +81,12 @@ return (
       <div className="others-header">See what others made</div>
       <div className='hr'/>
       <div className="posts-container">
-        {otherPosts.map((post) => (
+        {otherPosts.map((post, index) => (
           <div>
             <div key={post.id} className="post-card d-flex flex-column text-left">
-              <img src={food} className="post-img img-fluid" />
+              <img src={`data:image/png;base64,${otherPics[index]}`} className="post-img img-fluid" />
               <div className="d-flex p-3 align-items-end justify-content-between w-100">
-                <p style={{ marginTop: '10px' }}> {post.description} </p>
+                <p style={{ marginTop: '10px' }}> {post.body} </p>
                 <HandThumbsUp  width="40" height="40" />
               </div>
             </div>
