@@ -53,7 +53,8 @@ def add_user():
         # add user
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor = conn.execute('INSERT INTO users(username, password) VALUES (?, ?)', (username, hashed_password))
+        cursor = conn.execute('INSERT INTO users(username, password, maxUSA, maxChina, maxKorea, maxItaly, maxJapan) VALUES (?, ?, ?, ?, ?, ?, ?)', 
+                              (username, hashed_password, 0, 0, 0, 0, 0))
         conn.commit()
         conn.close()
         
