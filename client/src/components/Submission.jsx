@@ -8,18 +8,73 @@ const Submission = () => {
   const [comment, setComment] = useState('');
   const navigate = useNavigate();
 
+  const [title, setTitle] = useState("");
+
+  const [userId, setUserId] = useState(0);
+
+  const cuisineLevel = 1;
+  const cuisineType = "Italian";
+
   const handlePhotoChange = (e) => {
     setPhoto(URL.createObjectURL(e.target.files[0]));
   };
 
   const handleSubmit = () => {
-    alert('Photo submitted!');
-    // TODO: Add actual submission logic here
-    navigate('/Forum');
+    const fetchData = async () => {
+      try {
+        const uri = "http://localhost:5000/users/byUsername?username=" + localStorage.getItem('username');
+        const res = await fetch(uri, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json', 
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        const data = await res.json();
+        console.log(data)
+        setUserId(data.user.id);
+
+        const uri2 = "http://localhost:5000/posts/postPost";
+        const formData = new FormData();
+        const reqjson = {
+          "cuisineLevel": cuisineLevel,
+          "cuisineType": cuisineType,
+          "title": title,
+          "body": comment,
+          "userId": data.user.id,
+          "likeCount": 0,
+          "timeCreated": new Date().toISOString()
+        }
+        formData.append("buttface", JSON.stringify(reqjson));
+        formData.append("foodImage", photo); // Append the file directly
+      
+        const res2 = await fetch(uri2, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          },
+          body: formData
+        })
+
+        const data2 = await res2.json();
+        console.log(data2)
+        if (data2.status != 200) {
+          alert("Post submission failed. Please try again.");
+        } else {
+          alert("Post submitted successfully!");
+          navigate("/Forum");
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    } 
+
+    fetchData();
   };
 
   return (
     <div className="submission-container">
+      <input type='text' onChange={(event) => setTitle(event.target.value)} className="title-input bg-white" placeholder="Title" />
       <label htmlFor="upload-photo" className="photo-label">
         {photo ? (
           <img src={photo} alt="Preview" className="photo-preview" />
