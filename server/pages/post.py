@@ -102,3 +102,25 @@ def lvltype():
         return jsonify(status=200, message="Success", posts=post_dict, pictures=pics)
     except Exception as e:
         return jsonify(status=400, message=str(e)), 400
+    
+@post_bp.route('/getUserLatest', methods=['GET'])
+@jwt_required()
+@cross_origin()
+def getlatest():
+    try:
+        conn = get_db_connection()
+        latest_post = conn.execute('SELECT * FROM posts ORDER BY id DESC LIMIT 1').fetchone()
+        conn.close()
+        
+        if latest_post:
+            latest_post_dict = dict(latest_post)
+            
+            if 'foodImage' in latest_post_dict:
+                latest_post_dict['foodImage'] = base64.b64encode(latest_post_dict['foodImage']).decode('utf-8')
+            
+            return jsonify(status=200, message="Success", post=latest_post_dict)
+        else:
+            return jsonify(status=404, message="No posts found"), 404
+    except Exception as e:
+        return jsonify(status=400, message=str(e)), 400
+            
