@@ -8,12 +8,13 @@ import { useNavigate, useLocation } from 'react-router-dom';
 const LevelSelect = () => {
     const navigate = useNavigate();
     const levels = [1, 2, 3, 4, 5];
-    const id = '52954';
     const Meals_by_Country = {
         "China": ['52956', '52955', '52951', '52953', '52947'],
-        "Phillipines": ['53071', '53070', '53068', '53069', '53072']
+        "Phillipines": ['53071', '53070', '53068', '53069', '53072'],
+        "Japan": ['52831', '52733', '53065', '53033', '52820'],
+        "America": ['53013', '52855', '52860', '52812', '52987'],
+        "Italy": ['53064', '52796', '52844', '52982', '52810'],
     };
-    const [mealID, setMealID] = useState([]);
     const location = useLocation();
     const selectedCountry = location.state?.country;
 

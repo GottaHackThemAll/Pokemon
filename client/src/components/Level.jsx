@@ -1,15 +1,16 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import food from '../assets/food.jpg';
 import { Button } from 'react-bootstrap';
 import { ArrowLeft } from 'react-bootstrap-icons';
 import { useState, useEffect } from 'react';
 import Axios from "axios";
 
-const Level = () => {
+const Level = ({mealID}) => {
     const navigate = useNavigate();
 
-    const id = 52954
-    const [mealId, setMealId] = useState([])
+    const location = useLocation();
+    const id = location.state?.mealID;
+
     const [foodName, setFoodName] = useState("")
     const [image, setImage] = useState(null)
     const [ingredient1, setIngredient1] = useState("")
@@ -33,6 +34,7 @@ const Level = () => {
     const [ingredient19, setIngredient19] = useState("")
     const [ingredient20, setIngredient20] = useState("")
     const [instruction, setInstruction] = useState()
+    const [area, setArea] = useState("")
 
     
     useEffect(() => {
@@ -61,6 +63,8 @@ const Level = () => {
             setInstruction(res.data.meals[0].strInstructions);
             setFoodName(res.data.meals[0].strMeal);
             setImage(res.data.meals[0].strMealThumb)
+            setArea(res.data.meals[0].strArea);
+            
         });
     }, [])
 
@@ -69,8 +73,7 @@ const Level = () => {
             <Button variant="link" className='d-flex align-self-start items-center' style={{ color:"#E7FFD3", gap:"5px"}} onClick={() => navigate("/CountrySelect")}> <ArrowLeft/> Country Select </Button>   
             <div className="w-[90%]">
                 <div className="flex justify-between text-3xl text-[#F8FFF1] font-semibold">
-                    <p>Country</p>
-                    <p>Level 1</p>
+                    <p>{area}</p>
                 </div>
                 <div className="text-left text-[#F8FFF1] text-5xl font-bold">
                     {foodName}
