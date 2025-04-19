@@ -30,6 +30,8 @@ const LevelSelect = () => {
         Axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`).then((res) => {
         setMealID(res.data.meals[0].strMeal);
         })
+
+        console.log(selectedCountry)
     })
 
     useEffect(() => {
@@ -37,16 +39,17 @@ const LevelSelect = () => {
             try {
                 // Get meal IDs for the selected country
                 const mealIds = Meals_by_Country[selectedCountry] || [];
-                
+                constol
                 // Fetch all meals
-                const meals = await Promise.all(
-                    mealIds.map(async (id) => {
-                        const response = await Axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
-                        setMealID(response)
-                        console.log(mealID)
-                        return response.data.meals[0];
+                mealIds.map(async (id) => {
+                    // const response = await Axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+                    // setMealID(response)
+                    // console.log(mealID)
+                    // return response.data.meals[0];
+                    Axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`).then((res) => {
+                        setMealID(res.data.meals[0].strMeal);
                     })
-                );
+                })
 
                 // Split meals into difficulty groups
                 const totalMeals = meals.length;
