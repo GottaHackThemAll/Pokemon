@@ -1,3 +1,10 @@
+@import "tailwindcss";
+
+.submitRecipeButton {
+    border-radius: 15px !important;
+    font-size: 1rem !important;
+}
+
 .green-btn {
   color: #E7FFD3;
   background: #7EBB5F ;
