@@ -4,6 +4,8 @@ import { lazy } from 'react';
 import './App.css';
 
 const Home = lazy(() => import('./components/Home'));
+const Login = lazy(() => import('./components/Login'));
+const Signup = lazy(() => import('./components/Signup'));
 const CountrySelect = lazy(() => import('./components/CountrySelect'));
 
 const App = () => {
@@ -15,6 +17,12 @@ const App = () => {
           <Routes>
             <Route path="/" element={
               <Home />
+              }/>
+              <Route path="/Login" element={
+              <Login />
+              }/>
+              <Route path="/Signup" element={
+              <Signup />
               }/>
             <Route path="/CountrySelect" element={
               <CountrySelect />

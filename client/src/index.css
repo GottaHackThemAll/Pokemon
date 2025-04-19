@@ -3,7 +3,6 @@
   background: #7EBB5F ;
   border-radius: 10px;
   border: transparent 2px solid;
-  padding: none;
 }
 
 .green-btn:hover {
@@ -21,5 +20,24 @@
 
 .home-header-btn {
   font-size: 2rem;
+  padding: 10px;
 }
 
+.login-container {
+  color: #E7FFD3;
+  background-color: #7EBB5F;
+}
+
+.login-submit-btn {
+  color: #3A3A3A;
+  background: #E7FFD3;
+  border-radius: 10px;
+  border: transparent 2px solid;
+  padding-inline: 20px;
+  padding-block: 5px;
+  min-width: 200px;
+}
+
+.login-input-box {
+  color: #E7FFD3;
+}

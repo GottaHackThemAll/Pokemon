@@ -5,8 +5,8 @@ const Home = () => {
     return (
         <div className='d-flex'>
             <div className='d-flex flex-column justify-content-center w-50 text-start align-items-center ml-3'>
-                <div className='home home-header pl-2'>Welcome to CookingLingo!</div>
-                <button className='home green-btn home-header-btn px-2 align-self-start' onClick={() => navigate('/CountrySelect')}>
+                <div className='home home-header pl-2 mb-3'>Welcome to CookingLingo!</div>
+                <button className='home green-btn home-header-btn px-2 align-self-start' onClick={() => navigate('/Login')}>
                     Start your cooking Journey
                 </button>
             </div>
