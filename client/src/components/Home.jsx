@@ -9,6 +9,11 @@ const Home = () => {
                 <button className='home green-btn home-header-btn px-2 align-self-start' onClick={() => navigate('/CountrySelect')}>
                     Start your cooking Journey
                 </button>
+
+                <button className='green-btn' onClick={() => navigate('/Submission')}>
+                    Go to Submission Page
+                </button>
+                
             </div>
             <img src={duocook}/>  
         </div>
