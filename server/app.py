@@ -4,9 +4,11 @@ from flask_jwt_extended import JWTManager, create_access_token, get_jwt, get_jwt
 import os
 from datetime import timedelta
 from db_util import get_db_connection
+from flask_cors import CORS, cross_origin
 
 bcrypt = Bcrypt()
 jwt = JWTManager()
+cors = CORS()
 
 def create_app():
     app = Flask(__name__)
@@ -16,6 +18,10 @@ def create_app():
     
     bcrypt.init_app(app)
     jwt.init_app(app)
+    cors.init_app(app)
+    
+    
+    CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}}, supports_credentials=True)
     
     # adding different routes
     from pages.user import user_blueprint
