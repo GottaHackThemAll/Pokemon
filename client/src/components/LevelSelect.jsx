@@ -8,48 +8,48 @@ import { useNavigate, useLocation } from 'react-router-dom';
 const LevelSelect = () => {
     const navigate = useNavigate();
     const levels = [1, 2, 3, 4, 5];
-
-    const [showFilter, setShowFilter] = useState(false);
-
+    const id = '52954';
+    const Meals_by_Country = {
+        "China": ['52956', '52955', '52951', '52953', '52947'],
+        "Phillipines": ['53071', '53070', '53068', '53069', '53072']
+    };
+    const [mealID, setMealID] = useState([]);
     const location = useLocation();
     const selectedCountry = location.state?.country;
-    
-    // Determine difficulty for each level
-    const getDifficulty = (level) => {
-        const totalLevels = levels.length;
-        const third = Math.ceil(totalLevels / 3);
-        
-        if (level <= third) return 'easy';
-        if (level <= 2 * third) return 'intermediate';
-        return 'hard';
-    };
 
-    const handleLevelClick = () => {
-        setShowFilter(true);
+    const handleLevelClick = (mealIDs) => {
+        console.log(mealIDs);
+        navigate('/Level', { state: { mealID: mealIDs } });
     };
 
     return (
         <Container className='d-flex flex-column level-select-container align-items-center'>
-            <Button variant="link" className='d-flex align-self-start align-items-center' style={{ color:"#7EBB5F", gap:"5px"}} onClick={() => navigate("/CountrySelect")}> <ArrowLeft/> Country Select </Button> 
+            <Button
+                variant="link"
+                className='d-flex align-self-start align-items-center'
+                style={{ color: "#7EBB5F", gap: "5px" }}
+                onClick={() => navigate("/CountrySelect")}
+            >
+                <ArrowLeft /> Country Select
+            </Button>
             <div className='level-select-header d-flex flex-column mb-5'>
                 <h1 className='level-select-header title'> Course: {selectedCountry} </h1>
-                <h1 className='level-select-header level'> Level *number* </h1>
+                <h1 className='level-select-header level'> Levels </h1>
             </div>
 
             {/* Level bubbles in zigzag pattern */}
             <div className='level-bubbles-wrapper w-25'>
                 {levels.map((level, index) => {
-                    const difficulty = getDifficulty(level);
                     const isEven = index % 2 === 0;
                     return (
-                        <Row 
-                            key={level} 
+                        <Row
+                            key={level}
                             className={`level-row ${isEven ? 'justify-content-start' : 'justify-content-end'}`}
                         >
                             <Col xs='auto'>
-                                <div 
-                                    className={`level-select-bubble rounded-circle ${difficulty}`}
-                                    onClick={handleLevelClick}
+                                <div
+                                    className={`level-select-bubble rounded-circle`}
+                                    onClick={() => handleLevelClick(Meals_by_Country[selectedCountry]?.[index])}
                                 >
                                     <span className='level-number'>{level}</span>
                                 </div>
@@ -58,10 +58,6 @@ const LevelSelect = () => {
                     );
                 })}
             </div>
-            <ChooseLevel 
-                show={showFilter} 
-                onHide={() => setShowFilter(false)} 
-            />
         </Container>
     );
 };
