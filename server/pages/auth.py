@@ -1,10 +1,11 @@
 from flask import Blueprint, jsonify, request
-from app import jwt, bcrypt, create_access_token, jwt_required, unset_jwt_cookies
+from app import jwt, bcrypt, create_access_token, jwt_required, unset_jwt_cookies, cross_origin
 from db_util import get_db_connection
 
 auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route("/login", methods=['POST'])
+@cross_origin()
 def login():
     try:
         data = request.get_json()
@@ -36,6 +37,7 @@ def login():
     
 @auth_bp.route("/logout", methods=['POST'])
 @jwt_required()
+@cross_origin()
 def logout():
     try:
         response = jsonify({'logout': True})

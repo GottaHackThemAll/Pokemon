@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app import bcrypt
+from app import bcrypt, cross_origin
 from app import jwt_required
 from db_util import get_db_connection
 
@@ -20,6 +20,7 @@ def get_one_poggist(id):
 # GET ALL USERS
 @user_blueprint.route('/getAllUsers', methods=['GET'])
 @jwt_required()
+@cross_origin()
 def get_user():
     try:
         conn = get_db_connection()
@@ -33,6 +34,7 @@ def get_user():
 
 # ADD A USER
 @user_blueprint.route('/addUser', methods=['POST'])
+@cross_origin()
 def add_user():
     try:
         # check json req body

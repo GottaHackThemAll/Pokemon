@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, json
-from app import jwt_required
+from app import jwt_required, cross_origin
 from db_util import get_db_connection
 import base64
 
@@ -7,6 +7,7 @@ post_bp = Blueprint('post', __name__)
 
 @post_bp.route('/postPost', methods=['POST'])
 @jwt_required()
+@cross_origin()
 def post_that_post():
     try:
         # data = request.form.to_dict()
@@ -51,6 +52,7 @@ def post_that_post():
     
 @post_bp.route('/getAllPosts', methods=['GET'])
 @jwt_required()
+@cross_origin()
 def letsgetalltheseskibidiposts():
     try:
         conn = get_db_connection()
@@ -76,6 +78,7 @@ def letsgetalltheseskibidiposts():
     
 @post_bp.route("/getByLevelAndType", methods=['GET'])
 @jwt_required()
+@cross_origin()
 def lvltype():
     try:
         cuisineLevel = int(request.args.get('cuisineLevel'))
