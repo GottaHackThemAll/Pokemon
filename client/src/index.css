@@ -1,0 +1,21 @@
+.green-btn {
+  color: #E7FFD3;
+  background: #7EBB5F ;
+  border-radius: 10px;
+  border: transparent 2px solid;
+  padding: none;
+}
+
+.green-btn:hover {
+  color: #7EBB5F;
+  background: #E7FFD3 ;
+}
+
+.home-header {
+  font-size: 4rem;
+}
+
+.home-header-btn {
+  font-size: 2rem;
+}
+
