@@ -3,13 +3,16 @@ import { Container, Row, Col } from 'react-bootstrap';
 import ChooseLevel from './ChooseLevel';
 import { Button } from 'react-bootstrap';
 import { ArrowLeft } from 'react-bootstrap-icons';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const LevelSelect = () => {
     const navigate = useNavigate();
     const levels = [1, 2, 3, 4, 5];
 
     const [showFilter, setShowFilter] = useState(false);
+
+    const location = useLocation();
+    const selectedCountry = location.state?.country;
     
     // Determine difficulty for each level
     const getDifficulty = (level) => {
@@ -29,7 +32,7 @@ const LevelSelect = () => {
         <Container className='d-flex flex-column level-select-container align-items-center'>
             <Button variant="link" className='d-flex align-self-start align-items-center' style={{ color:"#7EBB5F", gap:"5px"}} onClick={() => navigate("/CountrySelect")}> <ArrowLeft/> Country Select </Button> 
             <div className='level-select-header d-flex flex-column mb-5'>
-                <h1 className='level-select-header title'> Course: *Country Name* </h1>
+                <h1 className='level-select-header title'> Course: {selectedCountry} </h1>
                 <h1 className='level-select-header level'> Level *number* </h1>
             </div>
 
