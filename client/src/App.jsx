@@ -48,24 +48,7 @@ const App = () => {
   return (
     <Router basename='/'>
       <Suspense fallback={<div>Loading...</div>}>
-<<<<<<< Updated upstream
-      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh'}}>
-        <div style={{flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-          <Routes>
-            <Route path="/" element={ <Home /> }/>
-            <Route path="/Login" element={ <Login /> }/>
-            <Route path="/Signup" element={ <Signup /> }/>
-            <Route path="/CountrySelect" element={ <CountrySelect /> }/>
-            <Route path="/LevelSelect" element={ <LevelSelect /> }/>
-            <Route path="/Level" element={ <Level /> }/>
-            <Route path="/Submission" element={ <Submission /> } />
-            <Route path="/Forum" element={ <Forum /> } />
-          </Routes>
-        </div>
-      </div>
-=======
         <AppContent />
->>>>>>> Stashed changes
       </Suspense>
     </Router>
   );
