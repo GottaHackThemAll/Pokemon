@@ -1,10 +1,11 @@
 from flask import Blueprint, jsonify, request
-from app import jwt, bcrypt, create_access_token, jwt_required, unset_jwt_cookies
+from app import jwt, bcrypt, create_access_token, jwt_required, unset_jwt_cookies, cross_origin
 from db_util import get_db_connection
 
 auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route("/login", methods=['POST'])
+@cross_origin()
 def login():
     try:
         data = request.get_json()
@@ -28,7 +29,7 @@ def login():
             stored_hash = daUser['password']
             if bcrypt.check_password_hash(stored_hash, password):
                 access_token = create_access_token(identity=str(username))
-                return jsonify(status=200, message="Login Successful pog", token=access_token)
+                return jsonify(status=200, message="Login Successful pog", token=access_token, username=username)
             else:
                 return jsonify(status=403, message="Incorrect Password")
     except Exception as e:
@@ -36,6 +37,7 @@ def login():
     
 @auth_bp.route("/logout", methods=['POST'])
 @jwt_required()
+@cross_origin()
 def logout():
     try:
         response = jsonify({'logout': True})

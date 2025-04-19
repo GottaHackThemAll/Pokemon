@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from app import bcrypt
+from app import bcrypt, cross_origin
 from app import jwt_required
 from db_util import get_db_connection
 
@@ -20,6 +20,7 @@ def get_one_poggist(id):
 # GET ALL USERS
 @user_blueprint.route('/getAllUsers', methods=['GET'])
 @jwt_required()
+@cross_origin()
 def get_user():
     try:
         conn = get_db_connection()
@@ -33,6 +34,7 @@ def get_user():
 
 # ADD A USER
 @user_blueprint.route('/addUser', methods=['POST'])
+@cross_origin()
 def add_user():
     try:
         # check json req body
@@ -51,10 +53,29 @@ def add_user():
         # add user
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor = conn.execute('INSERT INTO users(username, password) VALUES (?, ?)', (username, hashed_password))
+        cursor = conn.execute('INSERT INTO users(username, password, maxUSA, maxChina, maxKorea, maxItaly, maxJapan) VALUES (?, ?, ?, ?, ?, ?, ?)', 
+                              (username, hashed_password, 0, 0, 0, 0, 0))
         conn.commit()
         conn.close()
         
         return jsonify(status=200, message="Successfully added user!")
     except Exception as e:
         return jsonify(status=400, message=str(e))
+    
+@user_blueprint.route('/byUsername', methods=['GET'])
+@jwt_required()
+@cross_origin()
+def getbyusername():
+    try:
+        username = request.args.get('username')
+        
+        conn = get_db_connection()
+        user = conn.execute('SELECT * FROM users WHERE username=?', (username,)).fetchone()
+        conn.close()
+        
+        if len(dict(user)) != 0:
+            return jsonify(status=200, message="success", user=dict(user)), 200
+        else:
+            return jsonify(status=403, message="user not found"), 400
+    except Exception as e:
+        return jsonify(status=400, message=str(e)), 400
