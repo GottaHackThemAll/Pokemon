@@ -32,12 +32,18 @@ def post_that_post():
         likeCount = data['likeCount']
         body = data['body']
         
-        if 'foodImage' not in request.files:
+        # if 'foodImage' not in request.files:
+        #     return jsonify(status=400, message="no image brotha")
+        
+        # foodImage = request.files['foodImage']
+        
+        if 'foodImage' not in request.form:
             return jsonify(status=400, message="no image brotha")
         
-        foodImage = request.files['foodImage']
+        # foodImage = request.form['foodImage']
+        # foodImage_binary = foodImage.read()
         
-        foodImage_binary = foodImage.read()
+        foodImage_binary = request.form['foodImage']
         
         conn = get_db_connection()
         cursor = conn.cursor()
@@ -89,17 +95,17 @@ def lvltype():
         conn.close()
         
         list_of_dicts = [dict(row) for row in posts]
-        post_dict = {}
-        pics = []
+        # post_dict = {}
+        # pics = []
         
-        for index, original_dict in enumerate(list_of_dicts):
-            new_post_entry = {
-                k: (v if k != 'foodImage' else pics.append(base64.b64encode(original_dict['foodImage']).decode('utf-8'))) 
-                for k, v in original_dict.items()
-            }
-            post_dict[index] = new_post_entry
+        # for index, original_dict in enumerate(list_of_dicts):
+        #     new_post_entry = {
+        #         k: (v if k != 'foodImage' else pics.append(base64.b64encode(original_dict['foodImage']).decode('utf-8'))) 
+        #         for k, v in original_dict.items()
+        #     }
+        #     post_dict[index] = new_post_entry
         
-        return jsonify(status=200, message="Success", posts=post_dict, pictures=pics)
+        return jsonify(status=200, message="Success", posts=list_of_dicts)
     except Exception as e:
         return jsonify(status=400, message=str(e)), 400
     
@@ -114,9 +120,8 @@ def getlatest():
         
         if latest_post:
             latest_post_dict = dict(latest_post)
-            
-            if 'foodImage' in latest_post_dict:
-                latest_post_dict['foodImage'] = base64.b64encode(latest_post_dict['foodImage']).decode('utf-8')
+            # if 'foodImage' in latest_post_dict:
+                # latest_post_dict['foodImage'] = base64.b64encode(latest_post_dict['foodImage']).decode('utf-8')
             
             return jsonify(status=200, message="Success", post=latest_post_dict)
         else:
